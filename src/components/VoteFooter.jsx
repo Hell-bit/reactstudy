@@ -2,6 +2,7 @@ import { Button } from 'antd';
 // import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import ThemeContext from '../ThemeContext';
+import actions from '../store/actions';
 const VoteFooter = (props) => {
     // let { handleSup, handleOpp } = props;
     const { store } = useContext(ThemeContext);
@@ -11,9 +12,7 @@ const VoteFooter = (props) => {
             <Button
                 type='primary'
                 onClick={() => {
-                    store.dispatch({
-                        type: 'VOTE_SUP'
-                    });
+                    store.dispatch(actions.vote.sup());
                 }}
             >
                 支持
@@ -22,9 +21,7 @@ const VoteFooter = (props) => {
                 type='primary'
                 danger
                 onClick={() => {
-                    store.dispatch({
-                        type: 'VOTE_OPP'
-                    });
+                    store.dispatch(actions.vote.opp());
                 }}
             >
                 反对

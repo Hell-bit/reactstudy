@@ -22,7 +22,8 @@ class VoteClassMain extends React.Component {
     }
     render() {
         const { store } = this.context;
-        let { supNum, oppNum } = store.getState();
+        let { vote } = store.getState();
+        let { supNum, oppNum } = vote;
 
         // let { sup, opp } = this.props;
         let ratio = '',

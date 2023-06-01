@@ -10,7 +10,9 @@ import '@/views/demo.less';
 const Demo = () => {
     const { store } = useContext(ThemeContext);
     console.log(store);
-    let { supNum, oppNum } = store.getState();
+    let { vote } = store.getState();
+    console.log(store.getState());
+    let { supNum, oppNum, num } = vote;
     //组件第一次渲染完毕后，把让组件更新的方法放进store中
     // let [num, setNum] = useState(0);
     // const update = () => {
