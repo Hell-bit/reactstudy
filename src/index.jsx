@@ -26,7 +26,9 @@ import Demo from '@/views/redux/Demo1';
 //redux
 import store from '@/store';
 //基于上下文对象方式传递store
-import ThemeContext from './ThemeContext';
+// import ThemeContext from './ThemeContext';
+// import { Provider } from 'react-redux';
+import { Provider } from './myReactRedux.js';
 
 // import App from '@/App';
 // import Task from '@/views/Task';
@@ -41,11 +43,14 @@ root.render(
     <ConfigProvider locale={zhCN}>
         {/* <App /> */}
         {/* <Task /> */}
-        <ThemeContext.Provider value={{ store }}>
+        {/* <ThemeContext.Provider value={{ store }}>
             <Demo />
-        </ThemeContext.Provider>
+        </ThemeContext.Provider> */}
         {/* <DemoClass /> */}
         {/* <DemoContext /> */}
+        <Provider store={store}>
+            <Demo />
+        </Provider>
     </ConfigProvider>
 
     // <Demo />

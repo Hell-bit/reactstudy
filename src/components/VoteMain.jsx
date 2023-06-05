@@ -1,6 +1,7 @@
 import React, { useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import ThemeContext from '../ThemeContext';
+// import { connect } from 'react-redux';
 /**
  * memo可以对传过来的新老属性进行比较，如果传过来的属性没有发生改变，就不会更新
  * @param {*} props

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ThemeContext from '../ThemeContext';
+// import ThemeContext from '../ThemeContext';
+// import { connect } from 'react-redux';
+import { connect } from '@/myReactRedux';
 class VoteClassMain extends React.Component {
     // static defaultProps = {
     //     sup: 0,
@@ -10,21 +12,21 @@ class VoteClassMain extends React.Component {
     //     sup: PropTypes.number,
     //     opp: PropTypes.number
     // };
-    static contextType = ThemeContext;
-    // constructor(props) {
-    //     super(props);
-    // }
-    componentDidMount() {
-        const { store } = this.context;
-        store.subscribe(() => {
-            this.forceUpdate(); //强制更新
-        });
+    // static contextType = ThemeContext;
+    constructor(props) {
+        super(props);
     }
+    // componentDidMount() {
+    //     const { store } = this.context;
+    //     store.subscribe(() => {
+    //         this.forceUpdate(); //强制更新
+    //     });
+    // }
     render() {
-        const { store } = this.context;
-        let { vote } = store.getState();
-        let { supNum, oppNum } = vote;
-
+        // const { store } = this.context;
+        // let { vote } = store.getState();
+        // let { supNum, oppNum } = vote;
+        let { supNum, oppNum } = this.props;
         // let { sup, opp } = this.props;
         let ratio = '',
             total = supNum + oppNum;
@@ -39,4 +41,4 @@ class VoteClassMain extends React.Component {
         );
     }
 }
-export default VoteClassMain;
+export default connect((state) => state.vote)(VoteClassMain);
