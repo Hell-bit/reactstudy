@@ -4,7 +4,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = (app) => {
     app.use(
         createProxyMiddleware('/api', {
-            target: 'https://www.jianshu.com/asimov',
+            target: 'http://127.0.0.1:9000',
             changeOrigin: true,
             ws: true,
             pathRewrite: {
@@ -12,6 +12,16 @@ module.exports = (app) => {
             }
         })
     );
+    // app.use(
+    //     createProxyMiddleware('/api', {
+    //         target: 'https://www.jianshu.com/asimov',
+    //         changeOrigin: true,
+    //         ws: true,
+    //         pathRewrite: {
+    //             '^/api': ''
+    //         }
+    //     })
+    // );
     app.use(
         createProxyMiddleware('/zhi', {
             target: 'https://news-at.zhihu.com/api/4',

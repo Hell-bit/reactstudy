@@ -2,6 +2,7 @@ import * as TYPES from '../action-types';
 /**
  * vote模块要派发的行为对象管理
  * voteAction包含多个方法，每个方法执行，都返回要派发的行为对象
+ * redux-thunk 和 redux-promise都是处理异步派发的
  */
 //延迟函数，返回promise实例，在指定的时间后成功
 const delay = (interval = 100) => {

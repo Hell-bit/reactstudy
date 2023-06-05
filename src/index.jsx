@@ -22,16 +22,16 @@ import ReactDOM from 'react-dom/client';
 // import DemoClass from '@/views/Demo19';
 // import DemoContext from '@/views/Demo20';
 // import Demo from '@/views/Demo21';
-import Demo from '@/views/redux/Demo1';
+// import Demo from '@/views/redux/Demo1';
+import Task from '@/views/Task';
 //redux
 import store from '@/store';
 //基于上下文对象方式传递store
 // import ThemeContext from './ThemeContext';
-// import { Provider } from 'react-redux';
-import { Provider } from './myReactRedux.js';
+import { Provider } from 'react-redux';
+// import { Provider } from './myReactRedux.js';
 
 // import App from '@/App';
-// import Task from '@/views/Task';
 //使用antd组件库
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
@@ -49,7 +49,8 @@ root.render(
         {/* <DemoClass /> */}
         {/* <DemoContext /> */}
         <Provider store={store}>
-            <Demo />
+            {/* <Demo /> */}
+            <Task />
         </Provider>
     </ConfigProvider>
 
