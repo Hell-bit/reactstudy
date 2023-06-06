@@ -1,14 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import taskSliceReducer from './features/taskSlice';
-const store = configureStore({
-    //指定reducer
-    reducer: {
-        //按模块管理切片
-        task: taskSliceReducer
-    },
-    //使用中间件,如果不指定任何中间件，默认集成了redux-thunk
-    middleware: [logger, thunk]
-});
-export default store;
+import * as React from 'react';
+import TaskStore from './task';
+import { configure } from 'mobx';
+configure({ enforceActions: 'always' }); // 任何状态都能只能通过actions来修改，在实际开发中也包括新建状态。
+let taskStore = new TaskStore();
+export const store = { taskStore };
+
+export const storesContext = React.createContext(store);
+export const useStores = () => React.useContext(storesContext);
+export const StoresProvider = storesContext.Provider;

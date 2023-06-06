@@ -24,12 +24,15 @@ import ReactDOM from 'react-dom/client';
 // import Demo from '@/views/Demo21';
 // import Demo from '@/views/redux/Demo1';
 import Task from '@/views/Task';
+// import Demo from '@/mobxDemo2';
 //redux
-import store from '@/store';
+// import store from '@/store';
 //基于上下文对象方式传递store
 // import ThemeContext from './ThemeContext';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 // import { Provider } from './myReactRedux.js';
+// import { Provider } from 'mobx-react';
+import { StoresProvider, store } from './store';
 
 // import App from '@/App';
 //使用antd组件库
@@ -37,7 +40,10 @@ import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import 'antd/dist/reset.css';
 import './index.less';
+// import './defineProperty';
+// import './decorator1';
 // react 严格模式  <React.StrictMode>
+// console.log(store);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ConfigProvider locale={zhCN}>
@@ -48,10 +54,10 @@ root.render(
         </ThemeContext.Provider> */}
         {/* <DemoClass /> */}
         {/* <DemoContext /> */}
-        <Provider store={store}>
+        <StoresProvider value={store}>
             {/* <Demo /> */}
             <Task />
-        </Provider>
+        </StoresProvider>
     </ConfigProvider>
 
     // <Demo />

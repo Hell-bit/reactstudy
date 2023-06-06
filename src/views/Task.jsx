@@ -4,7 +4,8 @@ import { Button, DatePicker, Form, Input, Modal, Popconfirm, Table, Tag, message
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllTaskListAsync, removeTask as removeTaskAction, updateTask } from '../store/features/taskSlice';
 import { getTaskList, addTask, removeTask, completeTask } from '@/api';
-
+import { observer } from 'mobx-react-lite';
+import { useStores } from '@/store';
 /* 对日期处理的方法 */
 const zero = function zero(text) {
     text = String(text);
@@ -16,10 +17,16 @@ const formatTime = function formatTime(time) {
     return `${zero(month)}-${zero(day)} ${zero(hours)}:${zero(minutes)}`;
 };
 
-const Task = function Task() {
+const Task = function Task(props) {
     //获取公共状态的方法
-    let { taskList } = useSelector((state) => state.task),
-        dispatch = useDispatch();
+
+    //react-redux
+    // let { taskList } = useSelector((state) => state.task),
+    //     dispatch = useDispatch();
+
+    //mobx
+    let { taskStore } = useStores();
+    let { taskList } = taskStore;
     /* 表格列的数据 */
     const columns = [
         {
@@ -83,12 +90,15 @@ const Task = function Task() {
 
     /* 关于TABLE和数据的处理 */
     useEffect(() => {
+        // task.queryAllTaskActionAsync();
         if (!taskList) {
             // dispatch(getAllTaskListAsync());
             (async () => {
                 if (!taskList) {
                     setTableLoading(true);
-                    await dispatch(getAllTaskListAsync());
+                    // await dispatch(getAllTaskListAsync());
+                    taskStore.queryAllTaskActionAsync();
+                    // await task.queryAllTaskAction();
                     setTableLoading(false);
                 }
             })();
@@ -134,7 +144,9 @@ const Task = function Task() {
                 //重新派发异步任务，获取全部任务信息
                 // query();
                 setTableLoading(true);
-                await dispatch(getAllTaskListAsync());
+                // await dispatch(getAllTaskListAsync());
+                console.log(task.queryAllTaskActionAsync);
+                taskStore.queryAllTaskActionAsync();
                 setTableLoading(false);
                 message.success('恭喜您，操作成功了！');
             } else {
@@ -151,7 +163,8 @@ const Task = function Task() {
             if (+code === 0) {
                 //重新派发删除，获取全部任务信息
                 // query();
-                dispatch(removeTaskAction(id));
+                // dispatch(removeTaskAction(id));
+                taskStore.removeTaskAction(id);
                 message.success('恭喜您，操作成功了！');
             } else {
                 message.error('很遗憾，操作失败了，请稍后再试！');
@@ -161,10 +174,12 @@ const Task = function Task() {
     const updateHandle = async (id) => {
         try {
             let { code } = await completeTask(id);
+            console.log(code);
             if (+code === 0) {
                 //重新派发更新任务，获取全部任务信息
                 // query();
-                dispatch(updateTask(id));
+                // dispatch(updateTask(id));
+                taskStore.updateTaskAction(id);
                 message.success('恭喜您，操作成功了！');
             } else {
                 message.error('很遗憾，操作失败了，请稍后再试！');
@@ -241,4 +256,4 @@ const Task = function Task() {
         </div>
     );
 };
-export default Task;
+export default observer(Task);

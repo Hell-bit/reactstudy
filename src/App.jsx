@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import Nav from '@/views/Nav';
 // import Menu from '@/views/Menu';
-import Demo from '@/views/Demo22';
+// import Demo from '@/views/Demo22';
 
 const App = () => {
     let [x, setX] = useState(10),
